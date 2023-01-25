@@ -9,5 +9,9 @@ class EndPoints {
   static const getDataForConsulting = '/client/consulting/create';
   static const createConsulting = '/client/consulting';
   static const contactUs = '/contact-us';
+<<<<<<< HEAD
   static const tickets = '/tickets';
+=======
+  static const lawyerProfile = '/judger/settings';
+>>>>>>> 0f95f04 (sayed)
 }

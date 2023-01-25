@@ -42,7 +42,10 @@ class LoginCubit extends Cubit<LoginState> {
         // handle after response ======>>>
         if (sendLoginSmsModel.status == true) {
           debugPrint('otpCode: ${sendLoginSmsModel.data!.otp}');
-          OtherHelper().showTopSuccessToast(context, "الكود هو ${sendLoginSmsModel.data!.otp}");
+          OtherHelper().showTopSuccessToast(
+            context,
+            "الكود هو ${sendLoginSmsModel.data!.otp}",
+          );
           navigateTo(
             context,
             VerificationCodeScreen(
