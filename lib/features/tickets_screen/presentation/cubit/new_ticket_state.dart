@@ -1,9 +1,9 @@
-abstract class SupportState {}
+abstract class NewTicketState {}
 
-class SupportInitial extends SupportState {}
+class NewTicketInitial extends NewTicketState {}
 
-class SupportLoadingState extends SupportState {}
+class NewTicketLoadingState extends NewTicketState {}
 
-class SupportSuccessState extends SupportState {}
+class NewTicketSuccessState extends NewTicketState {}
 
-class SupportErrorState extends SupportState {}
+class NewTicketErrorState extends NewTicketState {}

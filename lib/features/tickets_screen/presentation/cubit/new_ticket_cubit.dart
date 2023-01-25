@@ -2,49 +2,43 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:ethaqapp/core/api/end_points.dart';
 import 'package:ethaqapp/core/api/remote/dio_helper.dart';
-import 'package:ethaqapp/core/components/reuse_functions.dart';
-import 'package:ethaqapp/core/utils/enums.dart';
-import 'package:ethaqapp/core/utils/other_helpers.dart';
-import 'package:ethaqapp/features/auth_screens/data/models/send_login_sms_model.dart';
-import 'package:ethaqapp/features/auth_screens/presentation/pages/verification_screen.dart';
-import 'package:ethaqapp/features/support_screen/presentation/cubit/support_state.dart';
+import 'package:ethaqapp/features/tickets_screen/presentation/cubit/new_ticket_state.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SupportCubit extends Cubit<SupportState> {
-  SupportCubit() : super(SupportInitial());
+class NewTicketCubit extends Cubit<NewTicketState> {
+  NewTicketCubit() : super(NewTicketInitial());
 
-  static SupportCubit get(BuildContext context) => BlocProvider.of(context);
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController subjectController = TextEditingController();
-  TextEditingController messegeController = TextEditingController();
+  static NewTicketCubit get(BuildContext context) => BlocProvider.of(context);
+  TextEditingController titleController = TextEditingController();
+  TextEditingController typeController = TextEditingController();
+  TextEditingController descController = TextEditingController();
   String phoneNumber = "";
-  GlobalKey<FormState> supportFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> newTicketFormKey = GlobalKey<FormState>();
 
-  Future<void> contatctUs(BuildContext context) async {
-    debugPrint(phoneNumberController.text);
-    emit(SupportLoadingState());
+  Future<void> newTicket(BuildContext context) async {
+    debugPrint(typeController.text);
+    emit(NewTicketLoadingState());
     try {
       await DioHelper.postData(
-        endPoint: EndPoints.contactUs,
+        endPoint: EndPoints.tickets,
         formDataIsEnabled: true,
         data: {
-          'name': nameController.text,
-          'phone': phoneNumberController.text,
-          'email': emailController.text,
-          'subject': subjectController.text,
-          'message': messegeController.text,
+          'title': titleController.text,
+          'type': typeController.text,
+          'description': descController.text,
+          'user_id': '3',
+          'status': 'open',
         },
       ).then((value) {
-        debugPrint(phoneNumberController.text);
+        debugPrint(titleController.text);
         debugPrint('sucess');
-        emit(SupportSuccessState());
+        emit(NewTicketSuccessState());
       }).catchError(
         (onError) {
           debugPrint(onError.toString());
-          emit(SupportErrorState());
+          emit(NewTicketErrorState());
         },
       );
     } catch (e) {

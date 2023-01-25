@@ -102,7 +102,6 @@ class MyProfileCubit extends Cubit<MyProfileState> {
           'image': await MultipartFile.fromFile(
             profileImage!.path,
             filename: profileImage!.name,
-
           ),
       },
     ).then(
@@ -112,7 +111,8 @@ class MyProfileCubit extends Cubit<MyProfileState> {
           OtherHelper().showTopInfoToast(context, myProfileModel.message ?? '');
           emit(UpdateProfileSuccessState());
         } else {
-          OtherHelper().showTopSuccessToast(context, myProfileModel.message ?? '');
+          OtherHelper()
+              .showTopSuccessToast(context, myProfileModel.message ?? '');
           getMyProfile(context);
         }
       },
