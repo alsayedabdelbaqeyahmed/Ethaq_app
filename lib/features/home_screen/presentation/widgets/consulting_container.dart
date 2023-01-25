@@ -8,8 +8,15 @@ class ConsultingContainer extends StatelessWidget {
   const ConsultingContainer({
     Key? key,
     this.type,
+    this.id,
+    this.date,
+    this.details,
   }) : super(key: key);
+
   final String? type;
+  final String? id;
+  final String? date;
+  final String? details;
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +49,18 @@ class ConsultingContainer extends StatelessWidget {
               // number =====>>>
               Expanded(
                 child: Row(
-                  children: const [
-                    Icon(
+                  children: [
+                    const Icon(
                       Icons.sell_outlined,
                       color: AppColors.secondColor,
                       size: 24,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: AppPadding.padding4,
                     ),
                     Text(
-                      '14',
-                      style: TextStyle(
+                      id ?? '0',
+                      style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                       ),
@@ -87,18 +94,18 @@ class ConsultingContainer extends StatelessWidget {
 
           // date =====>>>
           Row(
-            children: const [
-              Icon(
+            children: [
+              const Icon(
                 IconlyLight.calendar,
                 color: AppColors.secondColor,
                 size: 24,
               ),
-              SizedBox(
+              const SizedBox(
                 width: AppPadding.padding4,
               ),
               Text(
-                '12/12/2021',
-                style: TextStyle(
+                date ?? '',
+                style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w600,
                 ),
@@ -114,11 +121,15 @@ class ConsultingContainer extends StatelessWidget {
 
           // title =====>>>
           FittedBox(
-            child: Text(
-              'تمثيل قانوني قضائي',
-              style: AppStyles.title600.copyWith(
-                height: 1,
-                fontSize: 12,
+            child: Container (
+              //width: MediaQuery.of(context).size.width*0.1,
+              height: MediaQuery.of(context).size.width*0.1,
+              child: Text(
+                details ?? '',
+                style: AppStyles.title600.copyWith(
+                  height: 1,
+                  fontSize: 12,
+                ),
               ),
             ),
           ),

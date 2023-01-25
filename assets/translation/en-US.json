@@ -40,6 +40,7 @@
   "expiration_of_co_registration": "Expiration of commercial registration",
   "register_client": "Register client",
   "consulting": "Consulting",
+  "consulting_show": "Consulting No.",
   "home": "Home",
   "requests": "Requests",
   "search_a_lawyer": "Search a lawyer",
@@ -142,5 +143,6 @@
   "some_thing_went_wrong": "Some thing went wrong",
   "no_data_found": "No data found",
   "details_is_required": "Details is required",
+  "pay": "Pay",
   "": ""
 }

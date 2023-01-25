@@ -111,8 +111,8 @@ class Client {
   String? contract;
   num? is_active;
   String? notes;
-  double? current_balance;
-  double? suspended_balance;
+  num? current_balance;
+  num? suspended_balance;
   num? years_of_experience;
   String? bank_account;
   String? bio;
@@ -150,8 +150,8 @@ class Client {
     String? contract,
     num? is_active,
     String? notes,
-    double? current_balance,
-    double? suspended_balance,
+    num? current_balance,
+    num? suspended_balance,
     num? years_of_experience,
     String? bank_account,
     String? bio,

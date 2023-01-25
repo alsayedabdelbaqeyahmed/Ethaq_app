@@ -12,6 +12,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import '../../../balance_screen/presentation/pages/balance_screen.dart';
 import '../../../invoice_table_screen/presentation/pages/invoice_table_screen.dart';
 import '../../../my_profile/presentation/pages/my_profile_screen.dart';
+import '../../../privacy_policy_screen/presentation/pages/privacy_policy_screen.dart';
 import '../../../support_screen/presentation/pages/support_screen.dart';
 import '../../../tickets_screen/presentation/pages/tickets_screen.dart';
 import '../widgets/image_name_drawer.dart';
@@ -119,7 +120,9 @@ class DrawerPage extends StatelessWidget {
           ListTileDrawer(
             title: 'privacy_policy',
             leadingIcon: AppImages.clipboardSvg,
-            onTap: () {},
+            onTap: () {
+              navigateTo(context, const PrivacyPolicy());
+            },
           ),
 
           // tickets =====>>>
@@ -127,7 +130,7 @@ class DrawerPage extends StatelessWidget {
             title: 'tickets',
             leadingIcon: AppImages.send2Svg,
             onTap: () {
-              //navigateTo(context, const TicketsScreen());
+              navigateTo(context, const TicketsScreen());
             },
           ),
 

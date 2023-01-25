@@ -5,14 +5,8 @@ abstract class ConsultingState {}
 
 class ConsultingInitial extends ConsultingState {}
 
-class SendCodeLoadingConsultingState extends ConsultingState {}
+class LoadingConsultingState extends ConsultingState {}
 
-class SendCodeSuccessConsultingState extends ConsultingState {}
+class SuccessConsultingState extends ConsultingState {}
 
-class SendCodeErrorConsultingState extends ConsultingState {}
-
-class VerifyLoadingConsultingState extends ConsultingState {}
-
-class VerifySuccessConsultingState extends ConsultingState {}
-
-class VerifyErrorConsultingState extends ConsultingState {}
+class ErrorConsultingState extends ConsultingState {}

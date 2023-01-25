@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ethaqapp/config/themes/colors.dart';
 import 'package:ethaqapp/core/components/buttons/rounded_button.dart';
+import 'package:ethaqapp/core/components/reuse_functions.dart';
 import 'package:ethaqapp/core/components/widgets.dart';
 import 'package:ethaqapp/core/utils/app_images.dart';
 import 'package:ethaqapp/core/utils/app_sizes.dart';
+import 'package:ethaqapp/features/tickets_screen/presentation/pages/new_tickets_screen.dart';
 import 'package:flutter/material.dart';
 
 class TicketsScreen extends StatelessWidget {
@@ -34,7 +36,9 @@ class TicketsScreen extends StatelessWidget {
           bottom: AppPadding.largePadding,
         ),
         child: ReusedRoundedButton(
-          onPressed: () {},
+          onPressed: () {
+            navigateTo(context, const NewTicketsScreen());
+          },
           text: 'create_new_ticket',
           rowWidget: const AssetSvgImage(
             AppImages.ticket2Icon,

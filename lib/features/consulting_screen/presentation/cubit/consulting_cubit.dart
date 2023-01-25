@@ -4,6 +4,7 @@ import 'package:ethaqapp/core/api/remote/dio_helper.dart';
 import 'package:ethaqapp/core/utils/other_helpers.dart';
 import 'package:ethaqapp/features/consulting_screen/data/models/consulting_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -15,33 +16,48 @@ class ConsultingCubit extends Cubit<ConsultingState> {
   static ConsultingCubit get(BuildContext context) => BlocProvider.of(context);
 
   // variables
-  ConsultingModel consultingModel = ConsultingModel();
+  ConsultingModel pendingConsultingModel = ConsultingModel();
+  ConsultingModel activeConsultingModel = ConsultingModel();
+  ConsultingModel doneConsultingModel = ConsultingModel();
+  ConsultingModel cancelConsultingModel = ConsultingModel();
 
   // functions
-  Future<void> getConsultingData(BuildContext context , Map<String, dynamic> queryData) async {
-    emit(SendCodeLoadingConsultingState());
+  Future<void> getAllData(BuildContext context) async{
+    emit(LoadingConsultingState());
+    pendingConsultingModel = await getConsultingData(context, {'status':'pending'});
+    activeConsultingModel = await getConsultingData(context, {'status':'active'});
+    doneConsultingModel = await getConsultingData(context, {'status':'done'});
+    cancelConsultingModel = await getConsultingData(context, {'status':'cancel'});
+    emit(SuccessConsultingState());
+  }
+
+  Future<ConsultingModel> getConsultingData(BuildContext context,
+      Map<String, dynamic> queryData) async {
+    ConsultingModel consultingModel = ConsultingModel();
     await DioHelper.getData(
       url: '${EndPoints.baseUrl}/client/consulting',
       query: queryData,
     ).then(
           (value) {
-            consultingModel =
-        ConsultingModel.fromJson(value.data);
+        consultingModel =
+            ConsultingModel.fromJson(value.data);
 
         // handle after response ======>>>
         if (consultingModel.status == true) {
-          debugPrint('otpCode: ${consultingModel.data}');
+          debugPrint('${consultingModel.data}');
         } else {
           OtherHelper()
               .showTopFailToast(context, consultingModel.message ?? '');
         }
-        emit(SendCodeSuccessConsultingState());
+
       },
     ).catchError(
           (onError) {
         debugPrint(onError.toString());
-        emit(SendCodeErrorConsultingState());
+        emit(ErrorConsultingState());
       },
     );
+    return consultingModel;
   }
+
 }

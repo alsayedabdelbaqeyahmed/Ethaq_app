@@ -40,6 +40,7 @@
   "expiration_of_co_registration": "تاريخ انتهاء السجل التجاري",
   "register_client": "تسجيل عميل",
   "consulting": "الإستشارات",
+  "consulting_show": "استشارة رقم",
   "home": "الرئيسية",
   "requests": "الطلبات",
   "search_a_lawyer": "ابحث عن محامي",
@@ -144,5 +145,9 @@
   "some_thing_went_wrong": "حدث خطأ ما",
   "no_data_found": "لا توجد بيانات",
   "details_is_required": "التفاصيل مطلوبة",
-  "": ""
+  "pay": "سداد",
+  "Scope of use": "نطاق الاستخدام",
+  "Ticket address": "عنوان التذكرة",
+  "Choose Type": "إختر النوع", 
+  "description" : "الوصف" 
 }

@@ -8,5 +8,6 @@ class EndPoints {
   static const updateMyProfile = '/client/settings';
   static const getDataForConsulting = '/client/consulting/create';
   static const createConsulting = '/client/consulting';
-  static const contactUs = 'http://127.0.0.1:8000/api/contact-us';
+  static const contactUs = '/contact-us';
+  static const tickets = '/tickets';
 }
