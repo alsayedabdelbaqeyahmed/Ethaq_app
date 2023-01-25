@@ -36,6 +36,7 @@ class SupportCubit extends Cubit<SupportState> {
           'email': emailController.text,
           'subject': subjectController.text,
           'message': messegeController.text,
+          'created_at': DateTime.now()
         },
       ).then((value) {
         debugPrint(phoneNumberController.text);

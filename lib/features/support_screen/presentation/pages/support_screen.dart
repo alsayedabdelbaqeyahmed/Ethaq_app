@@ -30,7 +30,8 @@ class SupportScreen extends StatelessWidget {
               key: supportCubit.supportFormKey,
               child: ListView(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: AppPadding.largePadding),
+                  horizontal: AppPadding.largePadding,
+                ),
                 children: [
                   // contact us text ======>>>>
                   Container(

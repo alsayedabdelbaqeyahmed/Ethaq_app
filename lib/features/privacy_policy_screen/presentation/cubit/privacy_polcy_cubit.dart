@@ -18,8 +18,12 @@ class PrivecyPolicyCubit extends Cubit<PrivecyPolicyState> {
     emit(PrivecyPolicyLoadingState());
     try {
       await DioHelper.getData(url: EndPoints.privecyPolcy).then((value) {
-        PrivecyPolicyModel.fromJson(value);
         // debugPrint(titleController.text);
+        privecyPolicyModel = value.data
+            .map(
+              (e) => PrivecyPolicyModel.fromJson(e),
+            )
+            .toList();
         debugPrint('sucess');
         emit(PrivecyPolicySuccessState());
       }).catchError(

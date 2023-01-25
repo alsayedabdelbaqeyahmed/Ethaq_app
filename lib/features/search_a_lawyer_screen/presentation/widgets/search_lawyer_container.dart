@@ -7,10 +7,12 @@ import '../../../../core/components/image_avatar/search_lawyer_avatar.dart';
 import '../../../lawyer_profile/presentation/pages/lawyer_profile.dart';
 
 class SearchLawyerContainer extends StatelessWidget {
-  const SearchLawyerContainer({
-    Key? key,
-  }) : super(key: key);
+  const SearchLawyerContainer({Key? key, this.name, this.photo, this.id})
+      : super(key: key);
 
+  final String? name;
+  final num? id;
+  final String? photo;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,9 +40,9 @@ class SearchLawyerContainer extends StatelessWidget {
         children: [
           // Image Avatar && online status & Name ======>>>>
           // TODO:
-          const SearchLawyerAvatar(
-            name: "Ahmed Mohamed",
-            imageUrl: "clients/1673532340image_picker3450459246180782408.jpg",
+          SearchLawyerAvatar(
+            name: name!,
+            imageUrl: photo!,
           ),
 
           // Text Button with Forward Icon ======>>>>
@@ -48,7 +50,9 @@ class SearchLawyerContainer extends StatelessWidget {
             onTap: () {
               navigateTo(
                 context,
-                const LawyerProfileScreen(),
+                LawyerProfileScreen(
+                  id: id,
+                ),
               );
             },
             child: Row(

@@ -12,7 +12,7 @@ class EndPoints {
   static const tickets = '/tickets';
   static const comments = 'tickets/1';
   static const storeComment = 'tickets/storeComment/1';
-
+  static const searchAboutVender = '/client/vendors';
   static const lawyerProfile = '/judger/settings';
   static const privecyPolcy = '/politics';
 }
