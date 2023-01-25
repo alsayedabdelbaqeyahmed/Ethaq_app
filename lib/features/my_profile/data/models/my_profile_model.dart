@@ -6,6 +6,10 @@ MyProfileModel myProfileModelFromJson(String str) =>
 String myProfileModelToJson(MyProfileModel data) => json.encode(data.toJson());
 
 class MyProfileModel {
+  bool? status;
+  String? message;
+  DataMyProfile? dataMyProfile;
+
   MyProfileModel({
     this.status,
     this.message,
@@ -15,14 +19,9 @@ class MyProfileModel {
   MyProfileModel.fromJson(dynamic json) {
     status = json['status'];
     message = json['message'];
-    dataMyProfile = json['data'] != null
-        ? DataMyProfile.fromJson(json['data'])
-        : null;
+    dataMyProfile =
+        json['data'] != null ? DataMyProfile.fromJson(json['data']) : null;
   }
-
-  bool? status;
-  String? message;
-  DataMyProfile? dataMyProfile;
 
   MyProfileModel copyWith({
     bool? status,
@@ -52,6 +51,10 @@ DataMyProfile dataMyProfileFromJson(String str) =>
 String dataMyProfileToJson(DataMyProfile data) => json.encode(data.toJson());
 
 class DataMyProfile {
+  UserMyProfile? userMyProfile;
+  List<Countries>? countries;
+  List<Cities>? cities;
+
   DataMyProfile({
     this.userMyProfile,
     this.countries,
@@ -59,9 +62,8 @@ class DataMyProfile {
   });
 
   DataMyProfile.fromJson(dynamic json) {
-    userMyProfile = json['user'] != null
-        ? UserMyProfile.fromJson(json['user'])
-        : null;
+    userMyProfile =
+        json['user'] != null ? UserMyProfile.fromJson(json['user']) : null;
     if (json['countries'] != null) {
       countries = [];
       json['countries'].forEach((v) {
@@ -75,10 +77,6 @@ class DataMyProfile {
       });
     }
   }
-
-  UserMyProfile? userMyProfile;
-  List<Countries>? countries;
-  List<Cities>? cities;
 
   DataMyProfile copyWith({
     UserMyProfile? userMyProfile,
@@ -212,6 +210,44 @@ UserMyProfile userMyProfileFromJson(String str) =>
 String userMyProfileToJson(UserMyProfile data) => json.encode(data.toJson());
 
 class UserMyProfile {
+  num? id;
+  String? type;
+  String? membership;
+  String? name;
+  String? gender;
+  String? idNumber;
+  String? idEnd;
+  String? phone;
+  String? phoneVerifyAt;
+  String? email;
+  String? emailVerifiedAt;
+  String? photo;
+  String? cityName;
+  num? cityId;
+  num? countryId;
+  num? occupationId;
+  num? qualificationId;
+  num? specialtyId;
+  String? birthdate;
+  String? address;
+  String? companyName;
+  String? companyNumber;
+  String? contract;
+  num? isActive;
+  String? notes;
+  num? currentBalance;
+  num? suspendedBalance;
+  num? yearsOfExperience;
+  String? bankAccount;
+  String? bio;
+  String? createdAt;
+  String? updatedAt;
+  String? lastSeen;
+  num? isBlock;
+  num? consultingRequestId;
+  num? vendorConsultingTotalEvaluate;
+  Country? country;
+  City? city;
   UserMyProfile({
     this.id,
     this.type,
@@ -294,45 +330,6 @@ class UserMyProfile {
         json['country'] != null ? Country.fromJson(json['country']) : null;
     city = json['city'] != null ? City.fromJson(json['city']) : null;
   }
-
-  num? id;
-  String? type;
-  String? membership;
-  String? name;
-  String? gender;
-  String? idNumber;
-  String? idEnd;
-  String? phone;
-  String? phoneVerifyAt;
-  String? email;
-  String? emailVerifiedAt;
-  String? photo;
-  String? cityName;
-  num? cityId;
-  num? countryId;
-  num? occupationId;
-  num? qualificationId;
-  num? specialtyId;
-  String? birthdate;
-  String? address;
-  String? companyName;
-  String? companyNumber;
-  String? contract;
-  num? isActive;
-  String? notes;
-  num? currentBalance;
-  num? suspendedBalance;
-  num? yearsOfExperience;
-  String? bankAccount;
-  String? bio;
-  String? createdAt;
-  String? updatedAt;
-  String? lastSeen;
-  num? isBlock;
-  num? consultingRequestId;
-  num? vendorConsultingTotalEvaluate;
-  Country? country;
-  City? city;
 
   UserMyProfile copyWith({
     num? id,

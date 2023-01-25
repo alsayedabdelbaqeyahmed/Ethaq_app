@@ -10,6 +10,9 @@ class EndPoints {
   static const createConsulting = '/client/consulting';
   static const contactUs = '/contact-us';
   static const tickets = '/tickets';
+  static const comments = 'tickets/1';
+  static const storeComment = 'tickets/storeComment/1';
+
   static const lawyerProfile = '/judger/settings';
   static const privecyPolcy = '/politics';
 }

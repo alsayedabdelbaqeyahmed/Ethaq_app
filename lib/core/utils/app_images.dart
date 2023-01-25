@@ -40,4 +40,5 @@ class AppImages {
       'assets/image/svg_images/linkedin-in_logo.svg';
   static const String send2Svg = 'assets/image/svg_images/send2_icon.svg';
   static const String ticket2Icon = 'assets/image/svg_images/ticket_icon.svg';
+  static const String ticket3Icon = 'assets/image/svg_images/Vector.svg';
 }

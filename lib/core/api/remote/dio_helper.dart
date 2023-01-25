@@ -28,7 +28,7 @@ class DioHelper {
     final String token = HiveReuse.mainBox.get(AppConst.tokenBox) ?? '';
     dio!.options.headers = {
       'Authorization': "Bearer $token",
-      'Content-Type': 'application/json'
+      'Accept': 'application/json'
     };
     return dio!.get(url, queryParameters: query);
   }
@@ -43,7 +43,7 @@ class DioHelper {
     final String token = HiveReuse.mainBox.get(AppConst.tokenBox) ?? '';
     dio!.options.headers = {
       'Authorization': "Bearer $token",
-      'Content-Type': 'application/json'
+      'Accept': 'application/json'
     };
     return dio!.post(
       endPoint,
@@ -62,7 +62,7 @@ class DioHelper {
     final String token = HiveReuse.mainBox.get(AppConst.tokenBox) ?? '';
     dio!.options.headers = {
       'Authorization': "Bearer $token",
-      'Content-Type': 'application/json'
+      'Accept': 'application/json'
     };
     return dio!.put(
       endPoint,
@@ -81,7 +81,7 @@ class DioHelper {
     final String token = HiveReuse.mainBox.get(AppConst.tokenBox) ?? '';
     dio!.options.headers = {
       'Authorization': "Bearer $token",
-      'Content-Type': 'application/json'
+      'Accept': 'application/json'
     };
     return dio!.delete(
       endPoint,
