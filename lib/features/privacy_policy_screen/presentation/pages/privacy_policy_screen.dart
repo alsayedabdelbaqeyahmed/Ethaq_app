@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:ethaqapp/config/themes/colors.dart';
 import 'package:ethaqapp/config/themes/styles.dart';
-import 'package:ethaqapp/core/components/widgets.dart';
 import 'package:ethaqapp/core/utils/app_images.dart';
 import 'package:ethaqapp/core/utils/app_sizes.dart';
 import 'package:flutter/material.dart';

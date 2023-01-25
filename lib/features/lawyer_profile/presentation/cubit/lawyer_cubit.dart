@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:ethaqapp/core/api/end_points.dart';
 import 'package:ethaqapp/core/api/remote/dio_helper.dart';
-import 'package:ethaqapp/features/lawyers_screen/presentation/cubit/lawyer_state.dart';
+import 'package:ethaqapp/features/lawyer_profile/presentation/cubit/lawyer_state.dart';
 import 'package:ethaqapp/features/support_screen/presentation/cubit/support_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

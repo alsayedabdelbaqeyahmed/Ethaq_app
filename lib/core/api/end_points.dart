@@ -11,4 +11,5 @@ class EndPoints {
   static const contactUs = '/contact-us';
   static const tickets = '/tickets';
   static const lawyerProfile = '/judger/settings';
+  static const privecyPolcy = '/politics';
 }

@@ -10,6 +10,7 @@ import 'package:ethaqapp/core/utils/app_images.dart';
 import 'package:ethaqapp/core/utils/app_sizes.dart';
 import 'package:ethaqapp/features/tickets_screen/presentation/cubit/new_ticket_cubit.dart';
 import 'package:ethaqapp/features/tickets_screen/presentation/cubit/new_ticket_state.dart';
+import 'package:ethaqapp/features/tickets_screen/presentation/pages/tickets_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -113,7 +114,12 @@ class NewTicketsScreen extends StatelessWidget {
               ),
               child: ReusedRoundedButton(
                 onPressed: () async {
-                  await newTicketCubit.newTicket(context);
+                  await newTicketCubit.newTicket(context).then((value) {
+                    navigateTo(
+                      context,
+                      const TicketsScreen(),
+                    );
+                  });
                 },
                 text: 'create_new_ticket',
                 rowWidget: const AssetSvgImage(
