@@ -24,55 +24,57 @@ class TicketsScreen extends StatelessWidget {
         title: const Text('tickets').tr(),
       ),
       body: BlocProvider(
-        create: (context) => NewTicketCubit(),
+        create: (context) => NewTicketCubit()..getAllTicket(context),
         child: BlocConsumer<NewTicketCubit, NewTicketState>(
           listener: (context, state) {},
           builder: (ctx, state) {
-            final newTicketCubit = NewTicketCubit.get(ctx)
-              ..getAllTicket(context);
+            final newTicketCubit = NewTicketCubit.get(ctx);
 
             return Column(
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
                 SizedBox(
                   height: 400,
+                  width: double.infinity,
                   child: ListView.builder(
                     itemCount: newTicketCubit.ticketData!.length,
                     // ignore: unnecessary_parenthesis
                     itemBuilder: ((context, index) {
-                      final DateTime now =
-                          newTicketCubit.ticketData![index].createdAt!;
-                      final String formattedDate =
-                          DateFormat('yyyy-MM-dd – kk:mm').format(now);
+                      final date = newTicketCubit.ticketData![0].createdAt!
+                          .replaceAll(RegExp('T18:25:42.000000Z'), '');
                       return Container(
                         padding: const EdgeInsets.all(AppPadding.mediumPadding),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Icon(
-                              Icons.calendar_month,
-                              color: Color(0xffDFAF37),
-                            ),
-                            Text(
-                              formattedDate,
-                              style: AppStyles.subtitle100,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                vertical: AppPadding.largePadding,
-                              ),
-                              child: Text(
-                                newTicketCubit.ticketData![index].title!,
-                                style: AppStyles.title600,
-                              ).tr(),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.calendar_month,
+                                  color: Color(0xffDFAF37),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  date,
+                                  style: AppStyles.subtitle100,
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(
+                                    vertical: AppPadding.largePadding,
+                                  ),
+                                  child: Text(
+                                    newTicketCubit.ticketData![index].title!,
+                                    style: AppStyles.title600,
+                                  ).tr(),
+                                ),
+                              ],
                             ),
                             IconButton(
                               onPressed: () {
@@ -81,7 +83,7 @@ class TicketsScreen extends StatelessWidget {
                                   TicketsDetailsScreen(
                                     index: index,
                                     newTicketCubit: newTicketCubit,
-                                    createdAt: formattedDate,
+                                    createdAt: date,
                                   ),
                                 );
                               },

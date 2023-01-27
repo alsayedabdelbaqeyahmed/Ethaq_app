@@ -48,7 +48,7 @@ class NewTicketCubit extends Cubit<NewTicketState> {
             'description': descController.text,
             'user_id': value.dataMyProfile!.userMyProfile!.id,
             'status': 'open',
-            'created_at': DateTime.now(),
+            'created_at': DateTime.now().toString(),
           },
         ).then((value) {
           // send a notifiy to user with status of add messgege
@@ -122,10 +122,11 @@ class NewTicketCubit extends Cubit<NewTicketState> {
     try {
       await DioHelper.getData(url: EndPoints.tickets).then((value) {
         final List<dynamic> ticketsData = value.data["data"];
-
+        print(ticketsData);
         for (final element in ticketsData) {
           ticketData!.add(TicketModel.fromJson(element));
         }
+        print('ticket is ${ticketData![0].title}');
         emit(NewTicketSuccessState());
       }).catchError(
         (onError) {

@@ -9,6 +9,7 @@ import 'package:ethaqapp/features/auth_screens/presentation/pages/login/login_sc
 import 'package:ethaqapp/features/intro_screen/intro_screen/presentation/pages/intro_screen.dart';
 import 'package:ethaqapp/features/lawyer_profile/presentation/cubit/lawyer_profile_cubit.dart';
 import 'package:ethaqapp/features/main_screen/presentation/pages/main_screen.dart';
+import 'package:ethaqapp/features/tickets_screen/presentation/cubit/new_ticket_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
