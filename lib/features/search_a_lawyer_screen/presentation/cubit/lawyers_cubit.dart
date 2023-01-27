@@ -12,7 +12,7 @@ class SearchLawyersScreenCubit extends Cubit<SearchLawyersScreenState> {
       BlocProvider.of(context);
   TextEditingController nameControllers = TextEditingController();
   // get all lawyers data name and photo and id
-  List<LawyersModels>? searchlawyersScreenModel;
+  List<LawyersModels>? searchlawyersScreenModel = [];
 
   Future<void> searchAboutVenders(BuildContext context) async {
     emit(SearchLawyersScreenInitState());
@@ -23,13 +23,16 @@ class SearchLawyersScreenCubit extends Cubit<SearchLawyersScreenState> {
           'name': nameControllers.text,
         },
       ).then((value) {
+        // debugPrint('valus is ${value.data['vendors']}');
         //  List<dynamic> responceData = value.data;
-        searchlawyersScreenModel = value.data['vendors']
-            .map(
-              (e) => LawyersModels.fromJson(e),
-            )
-            .toList();
-        debugPrint('ticket is ${searchlawyersScreenModel![0]}');
+        final List<dynamic> lawyersData = value.data["data"]["vendors"];
+        debugPrint('value 1 is $lawyersData');
+
+        for (final element in lawyersData) {
+          searchlawyersScreenModel!.add(LawyersModels.fromJson(element));
+        }
+
+        // debugPrint('ticket is ${searchlawyersScreenModel![0].name}');
         emit(SearchLawyersScreengetDataSucessState());
       }).catchError(
         (onError) {
@@ -37,7 +40,7 @@ class SearchLawyersScreenCubit extends Cubit<SearchLawyersScreenState> {
           emit(SearchLawyersScreengetDataerrorState());
         },
       );
-      debugPrint('ticket is ${searchlawyersScreenModel![0]}');
+      // debugPrint('ticket is ${searchlawyersScreenModel![0]}');
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -49,13 +52,13 @@ class SearchLawyersScreenCubit extends Cubit<SearchLawyersScreenState> {
       await DioHelper.getData(
         url: EndPoints.searchAboutVender,
       ).then((value) {
-        //  List<dynamic> responceData = value.data;
-        searchlawyersScreenModel = value.data['vendors']
-            .map(
-              (e) => LawyersModels.fromJson(e),
-            )
-            .toList();
-        debugPrint('ticket is ${searchlawyersScreenModel![0]}');
+        final List<dynamic> lawyersData = value.data["data"]["vendors"];
+        // debugPrint('value 1 is $lawyersData');
+
+        for (final element in lawyersData) {
+          searchlawyersScreenModel!.add(LawyersModels.fromJson(element));
+        }
+        // debugPrint('lawyers is ${searchlawyersScreenModel!.length}');
         emit(SearchLawyersScreengetDataSucessState());
       }).catchError(
         (onError) {
@@ -63,7 +66,8 @@ class SearchLawyersScreenCubit extends Cubit<SearchLawyersScreenState> {
           emit(SearchLawyersScreengetDataerrorState());
         },
       );
-      debugPrint('ticket is ${searchlawyersScreenModel![0]}');
+      //  print('responce is $responce');
+      //  debugPrint('ticket is ${searchlawyersScreenModel![0]}');
     } catch (e) {
       debugPrint(e.toString());
     }

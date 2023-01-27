@@ -5,7 +5,10 @@ import '../../../../config/themes/styles.dart';
 import '../../../../core/utils/app_images.dart';
 
 class LawyerProfileAvatar extends StatelessWidget {
-  const LawyerProfileAvatar({Key? key}) : super(key: key);
+  final String? name;
+  final String? image;
+  const LawyerProfileAvatar({Key? key, this.image, this.name})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +21,8 @@ class LawyerProfileAvatar extends StatelessWidget {
           padding: const EdgeInsets.all(AppPadding.largePadding),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            image: const DecorationImage(
-              image: AssetImage(AppImages.sliderHomeLawyers),
+            image: DecorationImage(
+              image: NetworkImage(image!),
               fit: BoxFit.cover,
             ),
             border: Border.all(
@@ -34,7 +37,7 @@ class LawyerProfileAvatar extends StatelessWidget {
 
         // name =====>>>
         Text(
-          'إسم المستخدم',
+          name!,
           style: AppStyles.title600.copyWith(
             fontSize: AppFontSize.f12,
           ),

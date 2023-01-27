@@ -5,8 +5,8 @@ class TicketModel {
   final String? description;
   final int? userId;
   final String? status;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  final String? createdAt;
+  final String? updatedAt;
 
   TicketModel({
     this.id,

@@ -6,6 +6,7 @@ import 'package:ethaqapp/core/utils/app_sizes.dart';
 import 'package:ethaqapp/features/auth_screens/presentation/cubit/login/login_cubit.dart';
 import 'package:ethaqapp/features/auth_screens/presentation/cubit/login/login_state.dart';
 import 'package:ethaqapp/features/consulting_screen/presentation/pages/consulting_screen.dart';
+import 'package:ethaqapp/features/search_a_lawyer_screen/presentation/pages/search_a_lawyer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -86,7 +87,12 @@ class DrawerPage extends StatelessWidget {
           ListTileDrawer(
             title: 'search_a_lawyer',
             leadingIcon: AppImages.searchSvg,
-            onTap: () {},
+            onTap: () {
+              navigateTo(
+                context,
+                const SearchALawyerScreen(),
+              );
+            },
           ),
 
           // invoice ======>>>

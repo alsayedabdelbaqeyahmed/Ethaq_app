@@ -26,88 +26,107 @@ class TicketsDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('tickets').tr(),
       ),
-      body: ListView(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(AppPadding.mediumPadding),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const AssetSvgImage(
-                  AppImages.ticket3Icon,
-                  color: AppColors.secondColor,
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ListView(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(AppPadding.mediumPadding),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(10)),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const AssetSvgImage(
+                      AppImages.ticket3Icon,
+                      color: AppColors.secondColor,
+                    ),
+                    Container(
+                      padding: const EdgeInsetsDirectional.only(
+                        start: AppPadding.mediumPadding * 0.5,
+                        end: AppPadding.mediumPadding * 0.5,
+                      ),
+                      child: Text('${'Tickets_num'.tr()}$index'),
+                    ),
+                    const SizedBox(
+                      width: AppPadding.mediumPadding * 0.1,
+                    ),
+                    const Icon(
+                      Icons.calendar_month,
+                      color: AppColors.secondColor,
+                    ),
+                    const SizedBox(
+                      width: AppPadding.mediumPadding * 0.2,
+                    ),
+                    Text(
+                      createdAt!,
+                      style: AppStyles.subtitle100,
+                    ),
+                    const SizedBox(
+                      width: AppPadding.mediumPadding * 0.4,
+                    ),
+                    const Icon(
+                      Icons.watch_later,
+                      color: AppColors.secondColor,
+                    ),
+                    const SizedBox(
+                      width: AppPadding.mediumPadding * 0.3,
+                    ),
+                    const Text(
+                      'منذ 15 دقيقة',
+                      style: AppStyles.subtitle100,
+                    ),
+                  ],
                 ),
-                Container(
-                  padding: const EdgeInsets.all(AppPadding.mediumPadding),
-                  child: Text('${'Tickets_num'.tr()}$index'),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Icon(
-                  Icons.calendar_month,
-                  color: AppColors.secondColor,
-                ),
-                Text(
-                  createdAt!,
-                  style: AppStyles.subtitle100,
-                ),
-                const Icon(
-                  Icons.watch_later,
-                  color: AppColors.secondColor,
-                ),
-                const Text(
-                  'منذ 15 دقيقة',
-                  style: AppStyles.subtitle100,
-                ),
-              ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Container(
-            padding: const EdgeInsets.all(AppPadding.mediumPadding),
-            child: Text(
-              newTicketCubit!.ticketData![index!].title!,
-              style: AppStyles.title900,
-            ).tr(),
-          ),
-          Container(
-            padding: const EdgeInsets.all(AppPadding.mediumPadding),
-            child: Text(
-              newTicketCubit!.ticketData![index!].description!,
-              style: AppStyles.title300,
-            ).tr(),
-          ),
-          ProfileTextFormField(
-            labelText: '',
-            hintText: 'Write your comment',
-            maxLines: 3,
-            textEditingController: newTicketCubit!.comment,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'description_is_required'.tr();
-              }
-              return null;
-            },
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ReusedRoundedButton(
-            onPressed: () async {
-              await newTicketCubit!.addComment(
-                context,
-                newTicketCubit!.ticketData![index!].id!,
-              );
-            },
-            text: "send".tr(),
-            color: AppColors.cPrimary,
-            textColor: AppColors.offWhite,
-          ),
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: const EdgeInsets.all(AppPadding.mediumPadding),
+              child: Text(
+                newTicketCubit!.ticketData![index!].title!,
+                style: AppStyles.title900,
+              ).tr(),
+            ),
+            Container(
+              padding: const EdgeInsets.all(AppPadding.mediumPadding),
+              child: Text(
+                newTicketCubit!.ticketData![index!].description!,
+                style: AppStyles.title300,
+              ).tr(),
+            ),
+            ProfileTextFormField(
+              labelText: '',
+              hintText: 'Write your comment',
+              maxLines: 3,
+              textEditingController: newTicketCubit!.comment,
+              validator: (value) {
+                if (value!.isEmpty) {
+                  return 'description_is_required'.tr();
+                }
+                return null;
+              },
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ReusedRoundedButton(
+              onPressed: () async {
+                await newTicketCubit!.addComment(
+                  context,
+                  newTicketCubit!.ticketData![index!].id!,
+                );
+              },
+              text: "send".tr(),
+              color: AppColors.cPrimary,
+              textColor: AppColors.offWhite,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -114,12 +114,7 @@ class NewTicketsScreen extends StatelessWidget {
               ),
               child: ReusedRoundedButton(
                 onPressed: () async {
-                  await newTicketCubit.newTicket(context).then((value) {
-                    navigateTo(
-                      context,
-                      const TicketsScreen(),
-                    );
-                  });
+                  await newTicketCubit.newTicket(context);
                 },
                 text: 'create_new_ticket',
                 rowWidget: const AssetSvgImage(

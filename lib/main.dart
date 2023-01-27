@@ -7,7 +7,9 @@ import 'package:ethaqapp/core/api/remote/dio_helper.dart';
 import 'package:ethaqapp/core/utils/app_const.dart';
 import 'package:ethaqapp/features/auth_screens/presentation/pages/login/login_screen.dart';
 import 'package:ethaqapp/features/intro_screen/intro_screen/presentation/pages/intro_screen.dart';
+import 'package:ethaqapp/features/lawyer_profile/presentation/cubit/lawyer_profile_cubit.dart';
 import 'package:ethaqapp/features/main_screen/presentation/pages/main_screen.dart';
+import 'package:ethaqapp/features/tickets_screen/presentation/cubit/new_ticket_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,6 +71,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => MyProfileCubit()..getMyProfile(context),
+        ),
+        BlocProvider(
+          create: (context) => LawyerProfileCubit(),
         ),
       ],
       child: MaterialApp(

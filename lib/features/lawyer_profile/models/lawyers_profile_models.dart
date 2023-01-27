@@ -1,7 +1,7 @@
 class LawyersProfileModels {
   final String? name;
   final String? photo;
-  final num? idNumber;
+  final String? idNumber;
   final num? vendorOrdersAount;
   final num? isActive;
   final num? yearsOfExperience;
@@ -26,11 +26,13 @@ class LawyersProfileModels {
       name: map['name'],
       photo: map['photo'],
       idNumber: map['id_number'],
-      vendorOrdersAount: map['endor_orders_count'],
+      vendorOrdersAount: map["vendor_orders_count"],
+      yearsOfExperience: map["years_of_experience"],
       isActive: map['is_active'],
-      latestConsultingRequests: LatestConsultingRequests.fromJson(map),
-      specialty: Specialty.formJson(map),
-      qualification: Qualification.formJson(map),
+      latestConsultingRequests:
+          LatestConsultingRequests.fromJson(map["LatestConsultingRequests"]),
+      specialty: Specialty.formJson(map['specialty']),
+      qualification: Qualification.formJson(map['qualification']),
     );
   }
 }

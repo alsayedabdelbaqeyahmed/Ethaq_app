@@ -1,13 +1,15 @@
-// ignore_for_file: avoid_print, unnecessary_parenthesis
+// ignore_for_file: avoid_print, unnecessary_parenthesis, unnecessary_null_comparison
 
 import 'package:ethaqapp/core/api/end_points.dart';
 import 'package:ethaqapp/core/api/remote/dio_helper.dart';
+import 'package:ethaqapp/core/components/reuse_functions.dart';
 import 'package:ethaqapp/core/utils/other_helpers.dart';
 import 'package:ethaqapp/features/my_profile/data/models/my_profile_model.dart';
 import 'package:ethaqapp/features/tickets_screen/dara/commets_models.dart';
 
 import 'package:ethaqapp/features/tickets_screen/dara/tickets_model.dart';
 import 'package:ethaqapp/features/tickets_screen/presentation/cubit/new_ticket_state.dart';
+import 'package:ethaqapp/features/tickets_screen/presentation/pages/tickets_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +29,7 @@ class NewTicketCubit extends Cubit<NewTicketState> {
   List<CommentsModel>? commentModels = [];
   MyProfileModel? myProfileModel;
 
+// add new tickets
   Future<void> newTicket(BuildContext context) async {
     debugPrint(typeController.text);
     emit(NewTicketLoadingState());
@@ -45,9 +48,26 @@ class NewTicketCubit extends Cubit<NewTicketState> {
             'description': descController.text,
             'user_id': value.dataMyProfile!.userMyProfile!.id,
             'status': 'open',
-            'created_at': DateTime.now(),
+            'created_at': DateTime.now().toString(),
           },
         ).then((value) {
+          // send a notifiy to user with status of add messgege
+          if (value.statusCode == 200 || value.data["code"] == 200) {
+            OtherHelper().showTopSuccessToast(
+              context,
+              "${value.data["message"]}",
+            );
+            navigateTo(
+              context,
+              const TicketsScreen(),
+            );
+          } else {
+            OtherHelper().showTopSuccessToast(
+              context,
+              "${value.data["message"]}",
+            );
+          }
+
           debugPrint(titleController.text);
           debugPrint('sucess');
           emit(NewTicketSuccessState());
@@ -101,13 +121,12 @@ class NewTicketCubit extends Cubit<NewTicketState> {
     emit(NewTicketLoadingState());
     try {
       await DioHelper.getData(url: EndPoints.tickets).then((value) {
-        //  List<dynamic> responceData = value.data;
-        ticketData = value.data
-            .map(
-              (e) => TicketModel.fromJson(e),
-            )
-            .toList();
-        print('ticket is ${ticketData![0]}');
+        final List<dynamic> ticketsData = value.data["data"];
+        print(ticketsData);
+        for (final element in ticketsData) {
+          ticketData!.add(TicketModel.fromJson(element));
+        }
+        print('ticket is ${ticketData![0].title}');
         emit(NewTicketSuccessState());
       }).catchError(
         (onError) {
@@ -127,12 +146,12 @@ class NewTicketCubit extends Cubit<NewTicketState> {
     emit(NewTicketLoadingState());
     try {
       await getUserId(context)!.then((value) async {
-        print('user_id ${value.dataMyProfile!.userMyProfile!.id}');
         await DioHelper.postData(
           endPoint: EndPoints.storeComment,
           formDataIsEnabled: true,
           data: {
-            'id': 1, //comment id
+            'id':
+                ticetID == null || ticetID == 0 ? 1 : ticetID + 1, //comment id
             'ticket_id': ticetID,
             'user_id': value.dataMyProfile!.userMyProfile!.id,
             'comment': comment.text,
@@ -141,8 +160,20 @@ class NewTicketCubit extends Cubit<NewTicketState> {
             'read_at': DateTime.now(),
           },
         ).then((value) {
-          debugPrint(titleController.text);
-          debugPrint('sucess');
+          // if the comment is added sucessfully
+
+          if (value.statusCode == 200 || value.data['code'] == 200) {
+            OtherHelper().showTopSuccessToast(
+              context,
+              "${value.data["message"]}",
+            );
+          } else {
+            OtherHelper().showTopSuccessToast(
+              context,
+              "${value.data["message"]}",
+            );
+          }
+
           emit(NewTicketSuccessState());
         }).catchError(
           (onError) {
@@ -161,13 +192,13 @@ class NewTicketCubit extends Cubit<NewTicketState> {
     debugPrint(typeController.text);
     emit(NewTicketLoadingState());
     try {
-      await DioHelper.getData(url: EndPoints.comments).then((value) {
-        commentModels = value.data['ticket']['comments']
-            .map(
-              (e) => CommentsModel.fromJson(e),
-            )
-            .toList();
-        print('comment is ${commentModels![0]}');
+      await DioHelper.getData(url: EndPoints.comments).then((value) async {
+        final List<dynamic> commentsData = value.data["ticket"]["comments"];
+
+        for (final element in commentsData) {
+          commentModels!.add(CommentsModel.fromJson(element));
+        }
+        debugPrint('commentModels ${commentModels![0].comment}');
         emit(NewTicketSuccessState());
       }).catchError(
         (onError) {
@@ -175,7 +206,6 @@ class NewTicketCubit extends Cubit<NewTicketState> {
           emit(NewTicketErrorState());
         },
       );
-      print('commentModels ${commentModels![0]}');
     } catch (e) {
       debugPrint(e.toString());
     }
