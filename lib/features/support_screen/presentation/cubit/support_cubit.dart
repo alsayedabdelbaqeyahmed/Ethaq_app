@@ -1,12 +1,8 @@
-import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ethaqapp/core/api/end_points.dart';
 import 'package:ethaqapp/core/api/remote/dio_helper.dart';
-import 'package:ethaqapp/core/components/reuse_functions.dart';
-import 'package:ethaqapp/core/utils/enums.dart';
 import 'package:ethaqapp/core/utils/other_helpers.dart';
-import 'package:ethaqapp/features/auth_screens/data/models/send_login_sms_model.dart';
-import 'package:ethaqapp/features/auth_screens/presentation/pages/verification_screen.dart';
+
 import 'package:ethaqapp/features/support_screen/presentation/cubit/support_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +35,17 @@ class SupportCubit extends Cubit<SupportState> {
           'created_at': DateTime.now()
         },
       ).then((value) {
-        debugPrint(phoneNumberController.text);
-        debugPrint('sucess');
+        if (value.statusCode == 200 || value.data['status'] == true) {
+          OtherHelper().showTopSuccessToast(
+            context,
+            "${value.data["message"]}",
+          );
+        } else {
+          OtherHelper().showTopSuccessToast(
+            context,
+            "${value.data["message"]}",
+          );
+        }
         emit(SupportSuccessState());
       }).catchError(
         (onError) {

@@ -28,7 +28,8 @@ class TicketsScreen extends StatelessWidget {
         child: BlocConsumer<NewTicketCubit, NewTicketState>(
           listener: (context, state) {},
           builder: (ctx, state) {
-            final newTicketCubit = NewTicketCubit.get(ctx);
+            final newTicketCubit = NewTicketCubit.get(ctx)
+              ..getAllTicket(context);
 
             return Column(
               children: [
