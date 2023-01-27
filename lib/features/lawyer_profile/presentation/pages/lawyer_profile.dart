@@ -20,7 +20,7 @@ class LawyerProfileScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (ctx, state) {
         final lawyerProfileScreen = LawyerProfileCubit.get(ctx);
-        print(lawyerProfileScreen.lawyersProfileModels!.vendorOrdersAount);
+        //  print(lawyerProfileScreen.lawyersProfileModels!.vendorOrdersAount);
         return Scaffold(
           appBar: AppBar(
             title: const Text('personal_profile').tr(),
@@ -207,7 +207,10 @@ class LawyerProfileScreen extends StatelessWidget {
                 ),
 
                 // profile image & name =======>>>
-                const LawyerProfileAvatar(),
+                LawyerProfileAvatar(
+                  name: lawyerProfileScreen.lawyersProfileModels!.name,
+                  image: lawyerProfileScreen.lawyersProfileModels!.photo,
+                ),
               ],
             ),
           ),

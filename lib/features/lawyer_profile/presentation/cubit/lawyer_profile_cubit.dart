@@ -12,9 +12,6 @@ class LawyerProfileCubit extends Cubit<LawyerProfileState> {
   static LawyerProfileCubit get(BuildContext context) =>
       BlocProvider.of(context);
   LawyersProfileModels? lawyersProfileModels;
-  Qualification? qualification;
-  Specialty? specialty;
-  LatestConsultingRequests? latestConsultingRequests;
 
   Future<void> getProfileData(BuildContext context, num id) async {
     emit(LawyerProfileInitState());
