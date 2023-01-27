@@ -24,6 +24,7 @@ class MyProfileCubit extends Cubit<MyProfileState> {
       url: EndPoints.getMyProfile,
     ).then(
       (value) {
+        print('value is ${value.data}');
         myProfileModel = MyProfileModel.fromJson(value.data);
         if (myProfileModel!.status == false) {
           OtherHelper()
@@ -107,6 +108,7 @@ class MyProfileCubit extends Cubit<MyProfileState> {
     ).then(
       (value) {
         final myProfileModel = MyProfileModel.fromJson(value.data);
+
         if (myProfileModel.status == false) {
           OtherHelper().showTopInfoToast(context, myProfileModel.message ?? '');
           emit(UpdateProfileSuccessState());

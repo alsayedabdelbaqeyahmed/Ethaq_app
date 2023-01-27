@@ -38,20 +38,26 @@ class SearchALawyerScreen extends StatelessWidget {
                       prefixIcon: const BackButton(),
                       suffixIcon: IconButton(
                         onPressed: () async {
-                          await searchLawyerScreen.searchAboutVenders(context);
+                          searchLawyerScreen.nameControllers.text = '';
                         },
                         icon: const Icon(
                           Icons.close,
                           color: AppColors.cTextSubtitleLight,
                         ),
                       ),
+                      onChanged: (value) async {
+                        searchLawyerScreen.nameControllers.text = value;
+                        await searchLawyerScreen.searchAboutVenders(context);
+                      },
                     ),
                   ),
 
                   // see all lawyers ======>>>>
                   SeeAllTitle(
                     title: 'lawyers',
-                    onTap: () {},
+                    onTap: () {
+                      searchLawyerScreen.getAllVenders(context);
+                    },
                   ),
 
                   // Grid Search ======>>>>
